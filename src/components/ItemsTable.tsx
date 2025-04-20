@@ -22,26 +22,27 @@ interface ItemsTableProps {
 
 export const ItemsTable = ({ items, onItemChange, onItemDelete }: ItemsTableProps) => {
   return (
-    <div className="rounded-md border">
+    <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>Item Name</TableHead>
-            <TableHead className="w-[100px]">Quantity</TableHead>
-            <TableHead className="w-[120px]">Price</TableHead>
-            <TableHead className="w-[100px]">Discount %</TableHead>
-            <TableHead className="w-[120px]">Total</TableHead>
+          <TableRow className="bg-slate-50 hover:bg-slate-50">
+            <TableHead className="font-semibold text-slate-700">Item Name</TableHead>
+            <TableHead className="w-[100px] font-semibold text-slate-700">Quantity</TableHead>
+            <TableHead className="w-[120px] font-semibold text-slate-700">Price</TableHead>
+            <TableHead className="w-[100px] font-semibold text-slate-700">Discount %</TableHead>
+            <TableHead className="w-[120px] font-semibold text-slate-700">Total</TableHead>
             <TableHead className="w-[60px]"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {items.map((item) => (
-            <TableRow key={item.id}>
+            <TableRow key={item.id} className="hover:bg-slate-50">
               <TableCell>
                 <Input
                   value={item.name}
                   onChange={(e) => onItemChange(item.id, 'name', e.target.value)}
                   placeholder="Item name"
+                  className="border-slate-200 focus:border-blue-500 focus:ring-blue-500"
                 />
               </TableCell>
               <TableCell>
@@ -50,17 +51,18 @@ export const ItemsTable = ({ items, onItemChange, onItemDelete }: ItemsTableProp
                   min="1"
                   value={item.quantity}
                   onChange={(e) => onItemChange(item.id, 'quantity', parseInt(e.target.value) || 0)}
+                  className="border-slate-200 focus:border-blue-500 focus:ring-blue-500"
                 />
               </TableCell>
               <TableCell>
                 <div className="relative">
-                  <IndianRupee className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+                  <IndianRupee className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-slate-500" />
                   <Input
                     type="number"
                     min="0"
                     step="0.01"
                     value={item.price}
-                    className="pl-8"
+                    className="pl-8 border-slate-200 focus:border-blue-500 focus:ring-blue-500"
                     onChange={(e) => onItemChange(item.id, 'price', parseFloat(e.target.value) || 0)}
                   />
                 </div>
@@ -72,9 +74,10 @@ export const ItemsTable = ({ items, onItemChange, onItemDelete }: ItemsTableProp
                   max="100"
                   value={item.discount}
                   onChange={(e) => onItemChange(item.id, 'discount', parseFloat(e.target.value) || 0)}
+                  className="border-slate-200 focus:border-blue-500 focus:ring-blue-500"
                 />
               </TableCell>
-              <TableCell className="font-medium">
+              <TableCell className="font-medium text-slate-900">
                 <div className="flex items-center gap-1">
                   <IndianRupee className="w-3 h-3" />
                   <span>{calculateItemTotal(item.quantity, item.price, item.discount).toFixed(2)}</span>
@@ -85,6 +88,7 @@ export const ItemsTable = ({ items, onItemChange, onItemDelete }: ItemsTableProp
                   variant="ghost"
                   size="icon"
                   onClick={() => onItemDelete(item.id)}
+                  className="hover:bg-red-50 hover:text-red-600"
                 >
                   <Trash2 className="h-4 w-4" />
                 </Button>

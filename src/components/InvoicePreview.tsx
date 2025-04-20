@@ -10,58 +10,58 @@ interface InvoicePreviewProps {
 
 export const InvoicePreview = ({ invoice }: InvoicePreviewProps) => {
   return (
-    <Card className="w-full bg-white shadow-lg">
-      <CardHeader className="border-b">
-        <CardTitle>Invoice Preview</CardTitle>
+    <Card className="w-full bg-white shadow-lg border-slate-200">
+      <CardHeader className="border-b border-slate-200 bg-slate-50">
+        <CardTitle className="text-slate-800">Invoice Preview</CardTitle>
       </CardHeader>
       <CardContent className="p-6">
         <div className="space-y-6">
           <div className="space-y-2">
-            <h3 className="font-semibold text-lg">Customer Details</h3>
+            <h3 className="font-semibold text-lg text-slate-800">Customer Details</h3>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="text-gray-600">Name:</p>
-                <p className="font-medium">{invoice.customer.name || 'N/A'}</p>
+                <p className="text-slate-500">Name:</p>
+                <p className="font-medium text-slate-900">{invoice.customer.name || 'N/A'}</p>
               </div>
               <div>
-                <p className="text-gray-600">Email:</p>
-                <p className="font-medium">{invoice.customer.email || 'N/A'}</p>
+                <p className="text-slate-500">Email:</p>
+                <p className="font-medium text-slate-900">{invoice.customer.email || 'N/A'}</p>
               </div>
               <div>
-                <p className="text-gray-600">Phone:</p>
-                <p className="font-medium">{invoice.customer.phone || 'N/A'}</p>
+                <p className="text-slate-500">Phone:</p>
+                <p className="font-medium text-slate-900">{invoice.customer.phone || 'N/A'}</p>
               </div>
               <div>
-                <p className="text-gray-600">Address:</p>
-                <p className="font-medium">{invoice.customer.address || 'N/A'}</p>
+                <p className="text-slate-500">Address:</p>
+                <p className="font-medium text-slate-900">{invoice.customer.address || 'N/A'}</p>
               </div>
             </div>
           </div>
 
           <div className="space-y-2">
-            <h3 className="font-semibold text-lg">Items</h3>
-            <div className="border rounded-lg overflow-hidden">
+            <h3 className="font-semibold text-lg text-slate-800">Items</h3>
+            <div className="border border-slate-200 rounded-lg overflow-hidden">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50">
+                <thead className="bg-slate-50">
                   <tr>
-                    <th className="px-4 py-2 text-left">Item</th>
-                    <th className="px-4 py-2 text-right">Qty</th>
-                    <th className="px-4 py-2 text-right">Price</th>
-                    <th className="px-4 py-2 text-right">Total</th>
+                    <th className="px-4 py-2 text-left font-semibold text-slate-700">Item</th>
+                    <th className="px-4 py-2 text-right font-semibold text-slate-700">Qty</th>
+                    <th className="px-4 py-2 text-right font-semibold text-slate-700">Price</th>
+                    <th className="px-4 py-2 text-right font-semibold text-slate-700">Total</th>
                   </tr>
                 </thead>
                 <tbody>
                   {invoice.items.map((item) => (
-                    <tr key={item.id} className="border-t">
-                      <td className="px-4 py-2">{item.name}</td>
-                      <td className="px-4 py-2 text-right">{item.quantity}</td>
-                      <td className="px-4 py-2 text-right">
+                    <tr key={item.id} className="border-t border-slate-200">
+                      <td className="px-4 py-2 text-slate-900">{item.name}</td>
+                      <td className="px-4 py-2 text-right text-slate-900">{item.quantity}</td>
+                      <td className="px-4 py-2 text-right text-slate-900">
                         <div className="flex items-center justify-end gap-1">
                           <IndianRupee className="w-3 h-3" />
                           {item.price.toFixed(2)}
                         </div>
                       </td>
-                      <td className="px-4 py-2 text-right">
+                      <td className="px-4 py-2 text-right font-medium text-slate-900">
                         <div className="flex items-center justify-end gap-1">
                           <IndianRupee className="w-3 h-3" />
                           {item.total.toFixed(2)}
@@ -78,22 +78,22 @@ export const InvoicePreview = ({ invoice }: InvoicePreviewProps) => {
             <div className="flex justify-end">
               <div className="w-64 space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span>Subtotal:</span>
-                  <div className="flex items-center gap-1">
+                  <span className="text-slate-600">Subtotal:</span>
+                  <div className="flex items-center gap-1 text-slate-900">
                     <IndianRupee className="w-3 h-3" />
                     {invoice.subtotal.toFixed(2)}
                   </div>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span>Tax (18%):</span>
-                  <div className="flex items-center gap-1">
+                  <span className="text-slate-600">Tax (18%):</span>
+                  <div className="flex items-center gap-1 text-slate-900">
                     <IndianRupee className="w-3 h-3" />
                     {invoice.tax.toFixed(2)}
                   </div>
                 </div>
-                <div className="flex justify-between font-bold">
-                  <span>Total:</span>
-                  <div className="flex items-center gap-1">
+                <div className="flex justify-between font-bold pt-2 border-t border-slate-200">
+                  <span className="text-slate-800">Total:</span>
+                  <div className="flex items-center gap-1 text-slate-900">
                     <IndianRupee className="w-3 h-3" />
                     {invoice.total.toFixed(2)}
                   </div>
