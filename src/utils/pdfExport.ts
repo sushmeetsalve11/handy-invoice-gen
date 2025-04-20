@@ -1,4 +1,3 @@
-
 import jsPDF from 'jspdf';
 import { Invoice } from '@/types/invoice';
 
@@ -6,6 +5,7 @@ export const exportToPDF = (invoice: Invoice) => {
   const pdf = new jsPDF();
   const margin = 20;
   let yPos = margin;
+  const rupeeSymbol = '₹';
 
   // Header
   pdf.setFontSize(20);
@@ -49,17 +49,17 @@ export const exportToPDF = (invoice: Invoice) => {
     
     pdf.text(item.name, xPos, yPos);
     pdf.text(item.quantity.toString(), xPos + columnWidths[0], yPos);
-    pdf.text(`$${item.price.toFixed(2)}`, xPos + columnWidths[0] + columnWidths[1], yPos);
+    pdf.text(`${rupeeSymbol}${item.price.toFixed(2)}`, xPos + columnWidths[0] + columnWidths[1], yPos);
     pdf.text(`${item.discount}%`, xPos + columnWidths[0] + columnWidths[1] + columnWidths[2], yPos);
-    pdf.text(`$${item.total.toFixed(2)}`, xPos + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], yPos);
+    pdf.text(`${rupeeSymbol}${item.total.toFixed(2)}`, xPos + columnWidths[0] + columnWidths[1] + columnWidths[2] + columnWidths[3], yPos);
   });
 
   // Totals
   yPos += 20;
-  pdf.text(`Subtotal: $${invoice.subtotal.toFixed(2)}`, 140, yPos);
-  pdf.text(`Tax (18%): $${invoice.tax.toFixed(2)}`, 140, yPos + 10);
+  pdf.text(`Subtotal: ${rupeeSymbol}${invoice.subtotal.toFixed(2)}`, 140, yPos);
+  pdf.text(`Tax (18%): ${rupeeSymbol}${invoice.tax.toFixed(2)}`, 140, yPos + 10);
   pdf.setFont('helvetica', 'bold');
-  pdf.text(`Total: $${invoice.total.toFixed(2)}`, 140, yPos + 20);
+  pdf.text(`Total: ${rupeeSymbol}${invoice.total.toFixed(2)}`, 140, yPos + 20);
 
   // Footer
   pdf.setFont('helvetica', 'normal');

@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Trash2 } from 'lucide-react';
+import { Trash2, IndianRupee } from 'lucide-react';
 import { InvoiceItem } from '@/types/invoice';
 import { calculateItemTotal } from '@/utils/calculations';
 
@@ -53,13 +53,17 @@ export const ItemsTable = ({ items, onItemChange, onItemDelete }: ItemsTableProp
                 />
               </TableCell>
               <TableCell>
-                <Input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={item.price}
-                  onChange={(e) => onItemChange(item.id, 'price', parseFloat(e.target.value) || 0)}
-                />
+                <div className="relative">
+                  <IndianRupee className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" />
+                  <Input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={item.price}
+                    className="pl-8"
+                    onChange={(e) => onItemChange(item.id, 'price', parseFloat(e.target.value) || 0)}
+                  />
+                </div>
               </TableCell>
               <TableCell>
                 <Input
@@ -71,7 +75,10 @@ export const ItemsTable = ({ items, onItemChange, onItemDelete }: ItemsTableProp
                 />
               </TableCell>
               <TableCell className="font-medium">
-                ${calculateItemTotal(item.quantity, item.price, item.discount).toFixed(2)}
+                <div className="flex items-center gap-1">
+                  <IndianRupee className="w-3 h-3" />
+                  <span>{calculateItemTotal(item.quantity, item.price, item.discount).toFixed(2)}</span>
+                </div>
               </TableCell>
               <TableCell>
                 <Button
